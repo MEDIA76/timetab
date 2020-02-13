@@ -1,50 +1,49 @@
-let tab = {
-  'page': document.getElementById('tab'),
-  'hand': document.createElement('hr'),
-  'timezones': [
-    'America/Chicago',
-    'Europe/Luxembourg'
-  ]
-}
+chrome.storage.local.get('options', function(results) {
+  const main = document.querySelector('main');
+  const hr = document.createElement('hr');
+  const button = document.querySelector('button');
 
-function getTime(timezone) {
-  let date = new Date;
-  let options = {
-    'hour12': false, 
-    'hour': 'numeric', 
-    'minute': 'numeric'
-  };
+  let options = results.options;
 
-  if(timezone) {
-    options['timeZone'] = timezone;
-  }
+  button.addEventListener('click', function() {
+    chrome.runtime.openOptionsPage();
+  });
 
-  return date.toLocaleTimeString('en-US', options);
-}
+  options.clocks.forEach(clock => {
+    const template = main.querySelector('template');
+    const section = template.content.cloneNode(true);
 
-tab.timezones.forEach(timezone => {
-  let zone = {
-    'section': document.createElement('section'),
-    'time': document.createElement('time')
-  }
+    if(clock.timeZone.includes('/')) {
+      section.querySelector('time').timeZone = clock.timeZone;
+    }
 
-  setInterval(function replaceTime() {
-    zone.time.innerHTML = getTime(timezone);
+    if(options.labels) {
+      section.querySelector('label').textContent = clock.label;
+    } else {
+      section.querySelector('label').remove();
+    }
 
-    return replaceTime;
+    main.appendChild(section);
+  });
+
+  setInterval(function update() {
+    const date = new Date;
+    const seconds = date.getSeconds();
+    const degree = Math.round(360 * seconds / 60);
+
+    clocks.querySelectorAll('time').forEach(time => {
+      time.innerHTML = date.toLocaleTimeString('en-US', {
+        'timeZone': time.timeZone || undefined,
+        'hour12': !options.hour24,
+        'hour': 'numeric', 
+        'minute': 'numeric'
+      });
+    });
+
+    hr.style.transform = `rotate(${degree}deg)`;
+
+    return update;
   }(), 1000);
 
-  zone.section.appendChild(zone.time);
-  tab.page.appendChild(zone.section);
+  main.appendChild(hr);
 });
-
-setInterval(function replaceStyle() {
-  let seconds = new Date().getSeconds();
-  let degree = Math.round(360 * seconds / 60);
-
-  tab.hand.style.transform = `rotate(${degree}deg)`;
-
-  return replaceStyle;
-}(), 1000);
-
-tab.page.appendChild(tab.hand);
