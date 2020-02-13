@@ -1,6 +1,8 @@
 html,
 body {
   height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
   background-color: #EAEAEA;
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -10,7 +12,9 @@ body {
 * {
   margin: 0px;
   padding: 0px;
+  line-height: 1em;
   box-sizing: border-box;
+  z-index: 1;
 }
 
 main {
@@ -28,7 +32,7 @@ main > section {
   padding: 40px;
   align-self: center;
   align-items: center;
-  z-index: 1;
+  flex-flow: column;
 }
 
 main > hr {
@@ -43,16 +47,38 @@ main > hr {
   z-index: 0;
 }
 
-main time {
+section > time {
   font-size: 60px;
   font-weight: 300;
   color: rgba(0, 0, 0, 0.40);
+}
+
+section > label {
+  margin-top: 10px;
+  color: rgba(0, 0, 0, 0.20);
+}
+
+button {
+  position: absolute;
+  bottom: 0px;
+  padding: 20px;
+  color: rgba(0, 0, 0, 0.20);
+  background-color: transparent;
+  border: 0px;
+  outline: 0px;
+  cursor: pointer;
+}
+
+button > svg {
+  width: auto;
+  height: 20px;
+  fill: currentColor;
 }
 
 @media screen and (max-width: 600px) {
   main > hr {
     top: calc(50% - 80vh);
     height: 160vh;
-    border-width: 0px 80vh;
+    border-width: none 80vh;
   }
 }
