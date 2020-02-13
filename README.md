@@ -8,7 +8,7 @@ A simple Chrome extension that displays the time, or times (other zones), whenev
 
 ### [Download](https://github.com/capachow/timetab/releases/latest/download/timetab.zip)
 
-> Please note, this extension is not yet published on the Web Store. To install, download the latest release, unzip and store it somewhere on your computer, temporarily, put `chrome://extensions` in developer mode, and use 'Load unpacked' to select extension folder.
+> Please note, this extension is not yet published on the Web Store. To install, download the latest release, unzip and store it somewhere on your computer, temporarily put `chrome://extensions` in developer mode, and then click the 'Load unpacked' button to select extension folder.
 
 ###### Timetab Preview
 
