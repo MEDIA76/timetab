@@ -6,9 +6,9 @@ A simple Chrome extension that displays the time, or times (other zones), whenev
 - Show or hide custom labels
 - Choose 12 or 24 hour time
 
-### [Download](https://github.com/capachow/timetab/releases/latest/download/timetab.crx)
+### [Download](https://github.com/capachow/timetab/releases/latest/download/timetab.zip)
 
-> Please note, until this extension is published on the Web Store, you will need to, temporarily, put Chrome in developer mode in order to install Timetab. Drag and drop the downloaded `timetab.crx` file onto `chrome://extensions`.
+> Please note, this extension is not yet published on the Web Store. To install, download the latest release, unzip and store it somewhere on your computer, temporarily, put `chrome://extensions` in developer mode, and use 'Load unpacked' to select extension folder.
 
 ###### Timetab Preview
 
