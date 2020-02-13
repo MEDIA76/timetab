@@ -1,0 +1,77 @@
+html,
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  line-height: 1em;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+main {
+  padding: 20px;
+  padding-top: 0px;
+}
+
+section {
+  margin-bottom: 16px;
+}
+
+article,
+footer {
+  display: flex;
+}
+
+select,
+input,
+button {
+  height: 30px;
+  padding: 0px 6px;
+  font-size: inherit;
+  outline: 0px;
+}
+
+select,
+label,
+button {
+  cursor: pointer;
+}
+
+select,
+input {
+  width: 100%;
+}
+
+label {
+  display: flex;
+  margin-left: 16px;
+  white-space: nowrap;
+  align-items: center;
+}
+
+label > input {
+  width: 15px;
+  height: 15px;
+}
+
+label > dfn {
+  margin-left: 5px;
+  font-style: normal;
+}
+
+button {
+  display: inline-flex;
+  font-weight: bold;
+  flex: 0;
+}
+
+button > svg {
+  height: 1em;
+}
