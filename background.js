@@ -1,6 +1,4 @@
-chrome.browserAction.onClicked.addListener(function() {
-  chrome.tabs.create({'url': 'chrome://newtab'})
-});
+chrome.browserAction.onClicked.addListener(createNewTab);
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.local.set({
@@ -13,4 +11,12 @@ chrome.runtime.onInstalled.addListener(function() {
       'labels': true
     }
   });
+
+  createNewTab();
 });
+
+function createNewTab() {
+  chrome.tabs.create({
+    'url': 'chrome://newtab'
+  });
+}
