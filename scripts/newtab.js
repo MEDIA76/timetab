@@ -1,29 +1,31 @@
-chrome.storage.local.get('options', function(results) {
-  const main = document.querySelector('main');
-  const hr = document.createElement('hr');
-  const button = document.querySelector('button');
-
-  let options = results.options;
+chrome.storage.sync.get([
+  'clocks',
+  'settings'
+], function(results) {
+  const { clocks, settings } = results;
+  const main = document.querySelector('#clocks');
+  const template = main.querySelector('#clock');
+  const hand = document.createElement('hr');
+  const button = document.querySelector('#options');
 
   button.addEventListener('click', function() {
     chrome.runtime.openOptionsPage();
   });
 
-  options.clocks.forEach(clock => {
-    const template = main.querySelector('template');
-    const section = template.content.cloneNode(true);
+  clocks.forEach(clock => {
+    const clone = template.content.cloneNode(true);
 
     if(clock.timeZone.includes('/')) {
-      section.querySelector('time').timeZone = clock.timeZone;
+      clone.querySelector('time').timeZone = clock.timeZone;
     }
 
-    if(options.labels) {
-      section.querySelector('label').textContent = clock.label;
+    if(settings.labels) {
+      clone.querySelector('label').textContent = clock.label;
     } else {
-      section.querySelector('label').remove();
+      clone.querySelector('label').remove();
     }
 
-    main.appendChild(section);
+    main.appendChild(clone);
   });
 
   setInterval(function update() {
@@ -31,19 +33,19 @@ chrome.storage.local.get('options', function(results) {
     const seconds = date.getSeconds();
     const degree = Math.round(360 * seconds / 60);
 
-    clocks.querySelectorAll('time').forEach(time => {
+    main.querySelectorAll('time').forEach(time => {
       time.innerHTML = date.toLocaleTimeString('en-US', {
         'timeZone': time.timeZone || undefined,
-        'hour12': !options.hour24,
+        'hour12': !settings.hour24,
         'hour': 'numeric', 
         'minute': 'numeric'
       });
     });
 
-    hr.style.transform = `rotate(${degree}deg)`;
+    hand.style.transform = `rotate(${degree}deg)`;
 
     return update;
   }(), 1000);
 
-  main.appendChild(hr);
+  main.appendChild(hand);
 });

@@ -1,16 +1,22 @@
-chrome.browserAction.onClicked.addListener(function() {
-  chrome.tabs.create({'url': 'chrome://newtab'})
-});
+function createNewTab() {
+  chrome.tabs.create({
+    'url': 'chrome://newtab'
+  });
+}
+
+chrome.browserAction.onClicked.addListener(createNewTab);
 
 chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.local.set({
-    'options': {
-      'clocks': [{
-        'timeZone': 'Local',
-        'label': 'Local',
-      }],
+  chrome.storage.sync.set({
+    'clocks': [{
+      'timeZone': 'Local',
+      'label': 'Local',
+    }],
+    'settings': {
       'hour24': false,
       'labels': true
     }
   });
+
+  createNewTab();
 });
