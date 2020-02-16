@@ -1,12 +1,14 @@
-chrome.storage.local.get('options', function(results) {
+chrome.storage.sync.get([
+  'clocks',
+  'settings'
+], function(results) {
+  const { clocks, settings } = results;
   const section = document.querySelector('section');
   const footer = document.querySelector('footer');
   const button = {
     'save': document.querySelector('[name="save"]'),
     'add': document.querySelector('[name="add"]')
   };
-
-  let options = results.options;
 
   function add(clock = {}) {
     const template = document.getElementById('clock');
@@ -29,12 +31,12 @@ chrome.storage.local.get('options', function(results) {
     }
   });
 
-  options.clocks.forEach(clock => {
+  clocks.forEach(clock => {
     add(clock);
   });
 
   ['hour24', 'labels'].forEach(input => {
-    footer.querySelector(`[name="${input}"]`).checked = options[input];
+    footer.querySelector(`[name="${input}"]`).checked = settings[input];
   });
 
   button.save.addEventListener('click', function() {
@@ -47,9 +49,9 @@ chrome.storage.local.get('options', function(results) {
       });
     });
 
-    chrome.storage.local.set({
-      'options': {
-        'clocks': clocks,
+    chrome.storage.sync.set({
+      'clocks': clocks,
+      'settings': {
         'hour24': footer.querySelector('[name="hour24"]').checked,
         'labels': footer.querySelector('[name="labels"]').checked
       }
