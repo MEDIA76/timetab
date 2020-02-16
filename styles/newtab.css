@@ -69,10 +69,15 @@ button {
   cursor: pointer;
 }
 
-button > svg {
-  width: auto;
+button > img {
+  width: 20px;
   height: 20px;
-  fill: currentColor;
+  background-color: currentColor;
+}
+
+img.gear {
+  -webkit-mask-image: url('icons/gear.svg');
+  mask-image: url('icons/gear.svg');
 }
 
 @media screen and (max-width: 600px) {
