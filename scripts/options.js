@@ -34,7 +34,7 @@ chrome.storage.local.get('options', function(results) {
   });
 
   ['hour24', 'labels'].forEach(input => {
-    footer.querySelector(`[name='${input}']`).checked = options[input];
+    footer.querySelector(`[name="${input}"]`).checked = options[input];
   });
 
   button.save.addEventListener('click', function() {
@@ -50,8 +50,8 @@ chrome.storage.local.get('options', function(results) {
     chrome.storage.local.set({
       'options': {
         'clocks': clocks,
-        'hour24': footer.querySelector("[name='hour24']").checked,
-        'labels': footer.querySelector("[name='labels']").checked
+        'hour24': footer.querySelector('[name="hour24"]').checked,
+        'labels': footer.querySelector('[name="labels"]').checked
       }
     }, window.close);
   });
