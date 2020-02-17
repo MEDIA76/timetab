@@ -1,4 +1,4 @@
-## Timetab
+## TimeTab
 
 A simple Chrome extension that displays the time, or times (other zones), whenever a new tab is opened. Please be aware that this is an ongoing side project and may contain bugs from time to time while I improve it. [Creating issues](https://github.com/capachow/timetab/issues) on GitHub for reporting such bugs is always appreciated. Otherwise, enjoy!
 
@@ -10,6 +10,6 @@ A simple Chrome extension that displays the time, or times (other zones), whenev
 
 > Please note, this extension is not yet published on the Web Store. To install, download or clone the latest release; unzip and store it somewhere on your computer; temporarily put `chrome://extensions` in developer mode; then click the 'Load unpacked' button to select extension folder.
 
-###### Timetab Preview
+###### TimeTab Preview
 
-![Timetab Preview](https://user-images.githubusercontent.com/13763302/74478029-2871b400-4e72-11ea-9f01-8bcc1604334a.png)
+![TimeTab Preview](https://user-images.githubusercontent.com/13763302/74478029-2871b400-4e72-11ea-9f01-8bcc1604334a.png)

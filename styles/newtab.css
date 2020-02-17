@@ -76,8 +76,8 @@ button > img {
 }
 
 img.gear {
-  -webkit-mask-image: url('icons/gear.svg');
-  mask-image: url('icons/gear.svg');
+  -webkit-mask-image: url('/images/gear.svg');
+  mask-image: url('/images/gear.svg');
 }
 
 @media screen and (max-width: 600px) {
