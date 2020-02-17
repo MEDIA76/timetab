@@ -1,3 +1,25 @@
+chrome.storage.local.get([
+  'scheme'
+], function(results) {
+  const { scheme } = results;
+  const query = window.matchMedia('(prefers-color-scheme: dark)');
+  const mode = query.matches ? 'dark' : 'light';
+
+  document.body.setAttribute('class', scheme);
+
+  if(scheme !== mode) {
+    chrome.browserAction.setIcon({
+      'path': {
+        '128': `images/icon.${mode}.png`
+      }
+    });
+
+    chrome.storage.local.set({
+      'scheme': mode
+    });
+  }
+});
+
 chrome.storage.sync.get([
   'clocks',
   'settings'

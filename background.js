@@ -18,5 +18,9 @@ chrome.runtime.onInstalled.addListener(function() {
     }
   });
 
+  chrome.storage.local.set({
+    'scheme': 'light'
+  });
+
   createNewTab();
 });
