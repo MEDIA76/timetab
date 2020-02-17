@@ -1,5 +1,6 @@
 {
   "name": "TimeTab",
+  "version": "0.2.0",
   "description": "Simply displays the time, or times, whenever a new tab is opened.",
   "author": "Joshua Britt",
   "homepage_url": "https://github.com/capachow/timetab",

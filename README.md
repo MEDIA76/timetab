@@ -12,4 +12,4 @@ A simple Chrome extension that displays the time, or times (other zones), whenev
 
 ###### TimeTab Preview
 
-![TimeTab Preview](https://user-images.githubusercontent.com/13763302/74478029-2871b400-4e72-11ea-9f01-8bcc1604334a.png)
+![TimeTab Preview](https://user-images.githubusercontent.com/13763302/74627097-6c391780-5117-11ea-9593-4757e5b71c79.png)
