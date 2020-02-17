@@ -4,6 +4,9 @@
   "author": "Joshua Britt",
   "homepage_url": "https://github.com/capachow/timetab",
   "permissions": ["storage"],
+  "icons": {
+    "128": "images/icon.png"
+  },
   "background": {
     "scripts": ["background.js"],
     "persistent": false
