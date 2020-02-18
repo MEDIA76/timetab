@@ -1,3 +1,28 @@
+chrome.storage.local.get([
+  'scheme'
+], function(results) {
+  const { scheme } = results;
+  const query = window.matchMedia('(prefers-color-scheme: dark)');
+  const mode = query.matches ? 'dark' : 'light';
+
+  document.body.setAttribute('class', scheme);
+
+  if(scheme !== mode) {
+    chrome.browserAction.setIcon({
+      'path': {
+        '32': `images/${mode}/32.png`,
+        '48': `images/${mode}/48.png`,
+        '96': `images/${mode}/96.png`,
+        '128': `images/${mode}/128.png`
+      }
+    });
+
+    chrome.storage.local.set({
+      'scheme': mode
+    });
+  }
+});
+
 chrome.storage.sync.get([
   'clocks',
   'settings'

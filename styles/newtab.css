@@ -1,9 +1,39 @@
-html,
+:root {
+  --color-rgb: 99, 100, 102;
+  --background-rgb: 241, 243, 244;
+  --time-opacity: 0.6;
+  --label-opacity: 0.3;
+  --hand-opacity: 0.03;
+
+  --color: rgba(var(--color-rgb), 1);
+  --time: rgba(var(--color-rgb), var(--time-opacity));
+  --label: rgba(var(--color-rgb), var(--label-opacity));
+  --hand: rgba(var(--color-rgb), var(--hand-opacity));
+  --background: rgba(var(--background-rgb), 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-rgb: 185, 186, 188;
+    --background-rgb: 32, 33, 36;
+    --hand-opacity: 0.01;
+  }
+}
+
+html {
+  font-family: sans-serif;
+  color: var(--color);
+  background-color: var(--background);
+  -webkit-text-size-adjust: 100%;
+  overflow: hidden;
+}
+
 body {
   height: 100vh;
-  font-family: 'Roboto', sans-serif;
+  font-family: system-ui, sans-serif;
   font-size: 16px;
-  background-color: #EAEAEA;
+  line-height: 1;
+  overflow-y: auto;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -12,7 +42,6 @@ body {
 * {
   margin: 0px;
   padding: 0px;
-  line-height: 1em;
   box-sizing: border-box;
   z-index: 1;
 }
@@ -41,43 +70,9 @@ main > hr {
   height: 160vw;
   border: 0px solid transparent;
   border-width: 0px 80vw;
-  border-left-color: black;
+  border-left-color: var(--hand);
   transform-origin: center;
-  opacity: 0.02;
   z-index: 0;
-}
-
-section > time {
-  font-size: 60px;
-  font-weight: 300;
-  color: rgba(0, 0, 0, 0.40);
-}
-
-section > label {
-  margin-top: 10px;
-  color: rgba(0, 0, 0, 0.20);
-}
-
-button {
-  position: absolute;
-  bottom: 0px;
-  padding: 20px;
-  color: rgba(0, 0, 0, 0.20);
-  background-color: transparent;
-  border: 0px;
-  outline: 0px;
-  cursor: pointer;
-}
-
-button > img {
-  width: 20px;
-  height: 20px;
-  background-color: currentColor;
-}
-
-img.gear {
-  -webkit-mask-image: url('/images/gear.svg');
-  mask-image: url('/images/gear.svg');
 }
 
 @media screen and (max-width: 600px) {
@@ -86,4 +81,41 @@ img.gear {
     height: 160vh;
     border-width: none 80vh;
   }
+}
+
+section > time {
+  font-size: 60px;
+  font-weight: 300;
+  color: var(--time);
+}
+
+section > label {
+  margin-top: 10px;
+  color: var(--label);
+}
+
+button {
+  position: fixed;
+  bottom: 0px;
+  padding: 20px;
+  color: var(--color);
+  background-color: transparent;
+  border: 0px;
+  outline: 0px;
+  opacity: 0.3;
+  cursor: pointer;
+}
+
+button > img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+img.gear {
+  -webkit-mask-image: url('/images/gear.svg');
+  mask-image: url('/images/gear.svg');
 }
