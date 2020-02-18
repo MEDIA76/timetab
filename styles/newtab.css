@@ -107,6 +107,7 @@ button {
 }
 
 button > img {
+  display: block;
   width: 20px;
   height: 20px;
   background-color: currentColor;
