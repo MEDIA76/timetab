@@ -6,7 +6,10 @@
   "homepage_url": "https://github.com/capachow/timetab",
   "permissions": ["storage"],
   "icons": {
-    "128": "images/icon.light.png"
+    "32": "images/light/32.png",
+    "48": "images/light/48.png",
+    "96": "images/light/96.png",
+    "128": "images/light/128.png"
   },
   "background": {
     "scripts": ["background.js"],
