@@ -1,6 +1,6 @@
 ## TimeTab
 
-A simple Chrome extension that displays the time, or times (other zones), whenever a new tab is opened. Please be aware that this is an ongoing side project and may contain bugs from time to time while I improve it. [Creating issues](https://github.com/MEDIA76/timetab/issues) on GitHub for reporting such bugs is always appreciated. Otherwise, enjoy!
+A simple Chrome extension that displays the time, and/or the time of multiple zones, whenever a new tab is opened. Please be aware that this is an ongoing side project and may contain bugs from time to time while I improve it. [Creating issues](https://github.com/MEDIA76/timetab/issues) on GitHub for reporting such bugs is always appreciated. Otherwise, enjoy!
 
 - Display multiple clocks
 - Show or hide custom labels
