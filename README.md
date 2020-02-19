@@ -11,7 +11,7 @@ A simple Chrome extension that displays the time, and/or the time of multiple zo
 ### [Install via the Chrome Web Store][cws] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/dhjhmlhiaaepcekkmjpfcklcfiaepkof?color=0366d6&label=%20">][cws]
 
 [ghr]: https://github.com/MEDIA76/timetab/releases/latest/download/timetab.zip
-> or [download](https://github.com/MEDIA76/timetab/releases/latest/download/timetab.zip) the latest [<img valign="middle" src="https://img.shields.io/github/v/release/MEDIA76/timetab?color=6a737d&label=%20">][ghr] `.zip` development version from GitHub.
+> or [download][ghr] the latest [<img valign="middle" src="https://img.shields.io/github/v/release/MEDIA76/timetab?color=6a737d&label=%20">][ghr] `.zip` development version from GitHub.
 
 ###### Light|Dark Preview
 
