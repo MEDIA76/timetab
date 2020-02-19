@@ -8,6 +8,7 @@ A simple Chrome extension that displays the time, and/or the time of multiple zo
 - Light and dark mode support
 - Choose 12 or 24 hour format
 - Instant and runs offline
+- No additional site access
 
 [cws]: https://chrome.google.com/webstore/detail/timetab/dhjhmlhiaaepcekkmjpfcklcfiaepkof
 ### [Install via the Chrome Web Store][cws] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/dhjhmlhiaaepcekkmjpfcklcfiaepkof?color=0366d6&label=%20">][cws]
