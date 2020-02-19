@@ -7,9 +7,11 @@ A simple Chrome extension that displays the time, and/or the time of multiple zo
 - Choose 12 or 24 hour time
 - Light/dark mode support
 
-### [Download](https://github.com/MEDIA76/timetab/releases/latest/download/timetab.zip)
+[cws]: https://chrome.google.com/webstore/detail/timetab/dhjhmlhiaaepcekkmjpfcklcfiaepkof
+### [Install via the Chrome Web Store][cws] [<img valign="middle" src="https://img.shields.io/chrome-web-store/v/dhjhmlhiaaepcekkmjpfcklcfiaepkof?color=0366d6&label=%20">][cws]
 
-> Please note, this extension is not yet published on the Web Store. To install, download or clone the latest release; unzip and store it somewhere on your computer; temporarily put `chrome://extensions` in developer mode; then click the 'Load unpacked' button to select extension folder.
+[ghr]: https://github.com/MEDIA76/timetab/releases/latest/download/timetab.zip
+> or [download](https://github.com/MEDIA76/timetab/releases/latest/download/timetab.zip) the latest [<img valign="middle" src="https://img.shields.io/github/v/release/MEDIA76/timetab?color=6a737d&label=%20">][ghr] `.zip` development version from GitHub.
 
 ###### Light|Dark Preview
 
