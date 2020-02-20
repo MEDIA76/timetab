@@ -3,7 +3,7 @@
 A simple Chrome extension that displays the time, and/or the time of multiple zones, whenever a new tab is opened. Please note, this is an ongoing side project and that I plan to add even more [features](https://github.com/MEDIA76/timetab/projects) when I can get to them. Feedback, recommendations, and reporting bugs via [issues](https://github.com/MEDIA76/timetab/issues) is always welcome & appreciated. Otherwise, enjoy!
 
 - Display multiple clocks
-- Minimal and native design
+- Minimal and clean design
 - Show or hide custom labels
 - Light and dark mode support
 - Choose 12 or 24 hour format
