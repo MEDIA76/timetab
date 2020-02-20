@@ -80,7 +80,7 @@ main > hr {
   main > hr {
     top: calc(50% - 80vh);
     height: 160vh;
-    border-width: none 80vh;
+    border-width: 0px 80vh;
   }
 }
 
