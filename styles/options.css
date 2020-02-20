@@ -1,6 +1,6 @@
 html {
   font-family: sans-serif;
-  color: #636467;
+  color: #636363;
   background-color: #FFFFFF;
   -webkit-text-size-adjust: 100%;
 }
@@ -21,7 +21,7 @@ body {
 
 main {
   padding: 20px;
-  border-top: 1px solid #EFEFEF;
+  border-top: 1px solid #F2F2F2;
 }
 
 main > * {
@@ -109,6 +109,10 @@ button {
   background-color: #F2F2F2;
 }
 
+input {
+  background-color: transparent;
+}
+
 input::placeholder {
   color: #B6B6B6;
 }
@@ -157,7 +161,7 @@ label > dfn {
 button {
   display: inline-flex;
   font-weight: bold;
-  color: inherit
+  color: inherit;
   flex: 0;
 }
 
@@ -192,4 +196,45 @@ button > img.plus {
 button > img.minus {
   -webkit-mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"%3E%3Cpath d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/%3E%3C/svg%3E');
   mask-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"%3E%3Cpath d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/%3E%3C/svg%3E');
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color: #DEDEDE;
+    background-color: #292A2D;
+  }
+
+  main {
+    border-top-color: #363636;
+  }
+
+  input,
+  select,
+  button {
+    border-color: #4F4F4F;
+  }
+
+  select,
+  label > input,
+  button {
+    background-color: #363636;
+  }
+
+  input::placeholder {
+    color: #585858;
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%23DEDEDE' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'/%3E%3C/svg%3E");
+  }
+
+  label {
+    border-color: #363636;
+  }
+
+  button#submit {
+    color: #292A2D;
+    background-color: #DEDEDE;
+    border-color: #DEDEDE;
+  }
 }
