@@ -3,15 +3,17 @@ chrome.storage.sync.get([
   'settings'
 ], function(results) {
   const { clocks, settings } = results;
-  const section = document.querySelector('section');
-  const footer = document.querySelector('footer');
+  const section = {
+    'clocks': document.querySelector('#clocks'),
+    'settings': document.querySelector('#settings')
+  };
   const button = {
     'save': document.querySelector('[name="save"]'),
     'add': document.querySelector('[name="add"]')
   };
 
-  function add(clock = {}) {
-    const template = document.getElementById('clock');
+  function addRow(clock = {}) {
+    const template = section.clocks.querySelector('#clock');
     const article = template.content.cloneNode(true);
 
     if(clock.timeZone) {
@@ -22,41 +24,48 @@ chrome.storage.sync.get([
       article.querySelector('input').value = clock.label;
     }
 
-    section.appendChild(article);
+    section.clocks.appendChild(article);
   }
   
-  section.addEventListener('click', function(event) {
+  section.clocks.addEventListener('click', function(event) {
     if(event.target.tagName.toLowerCase() === 'button') {
       event.target.closest('article').remove();
     }
   });
 
   clocks.forEach(clock => {
-    add(clock);
+    addRow(clock);
   });
 
-  ['hour24', 'labels'].forEach(input => {
-    footer.querySelector(`[name="${input}"]`).checked = settings[input];
+  ['hour24', 'labels'].forEach(name => {
+    const attribute = `[name="${name}"]`;
+    const input = section.settings.querySelector(attribute);
+
+    input.checked = settings[name];
   });
 
   button.save.addEventListener('click', function() {
-    let clocks = [];
+    let object = {
+      'clocks': [],
+      'settings': {}
+    };
 
-    section.querySelectorAll('article').forEach(row => {
-      clocks.push({
+    section.clocks.querySelectorAll('article').forEach(row => {
+      object.clocks.push({
         'timeZone': row.querySelector('select').value,
         'label': row.querySelector('input').value
       });
     });
 
-    chrome.storage.sync.set({
-      'clocks': clocks,
-      'settings': {
-        'hour24': footer.querySelector('[name="hour24"]').checked,
-        'labels': footer.querySelector('[name="labels"]').checked
-      }
-    }, window.close);
+    ['hour24', 'labels'].forEach(name => {
+      const attribute = `[name="${name}"]`;
+      const input = section.settings.querySelector(attribute);
+
+      object.settings[name] = input.checked;
+    });
+
+    chrome.storage.sync.set(object, window.close);
   });
 
-  button.add.addEventListener('click', add);
+  button.add.addEventListener('click', addRow);
 });

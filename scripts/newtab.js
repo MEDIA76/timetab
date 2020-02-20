@@ -9,7 +9,7 @@ chrome.storage.local.get([
 
   if(scheme !== mode) {
     chrome.browserAction.setIcon({
-      'path': `images/${mode}/38.png`
+      'path': `icons/${mode}/38.png`
     });
 
     chrome.storage.local.set({

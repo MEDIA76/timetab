@@ -9,7 +9,7 @@
     <main>
       <section id="clocks">
         <template id="clock">
-          <article>
+          <article class="inputs">
             <select>
               <option value="Local">Local</option>
               <option value="Africa/Abidjan">Africa/Abidjan</option>
@@ -440,20 +440,12 @@
             </select>
             <input type="text" name="label" placeholder="Label" />
             <button type="button" name="remove">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path fill="currentColor" d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-              </svg>
+              <img class="minus" />
             </button>
           </article>
         </template>
       </section>
-      <footer>
-        <button type="button" name="save">Save</button>
-        <button type="button" name="add">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-            <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-          </svg>
-        </button>
+      <section id="settings">
         <label>
           <input type="checkbox" name="hour24" />
           <dfn>Use 24 Hour</dfn>
@@ -462,6 +454,12 @@
           <input type="checkbox" name="labels" />
           <dfn>Show Labels</dfn>
         </label>
+      </section>
+      <footer>
+        <button id="submit" type="button" name="save">Save</button>
+        <button type="button" name="add">
+          <img class="plus" />
+        </button>
       </footer>
     </main>
     <script src="scripts/options.js"></script>

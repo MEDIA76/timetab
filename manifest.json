@@ -6,9 +6,9 @@
   "homepage_url": "https://github.com/MEDIA76/timetab",
   "permissions": ["storage"],
   "icons": {
-    "16": "images/light/16.png",
-    "48": "images/light/48.png",
-    "128": "images/light/128.png"
+    "16": "icons/light/16.png",
+    "48": "icons/light/48.png",
+    "128": "icons/light/128.png"
   },
   "background": {
     "scripts": ["background.js"],
@@ -16,7 +16,7 @@
   },
   "browser_action": {
     "default_icon": {
-      "38": "images/light/38.png"
+      "38": "icons/light/38.png"
    },
     "default_title": "New Tab"
   },
