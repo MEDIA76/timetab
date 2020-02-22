@@ -1,7 +1,7 @@
 {
   "name": "TimeTab",
   "version": "3.2",
-  "description": "A simple Chrome extension that displays the time, and/or the time of multiple zones, whenever a new tab is opened.",
+  "description": "A simple extension that displays the time, and/or the time of multiple zones, whenever a new tab is opened.",
   "author": "Joshua Britt",
   "homepage_url": "https://github.com/MEDIA76/timetab",
   "permissions": ["storage"],
