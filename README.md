@@ -16,6 +16,9 @@ A simple extension that displays the time, and/or the time of multiple zones, wh
 [fao]: https://addons.mozilla.org/en-US/firefox/addon/timetab
 ### [Install via Firefox Add-ons][fao] [<img valign="middle" height="22" src="https://user-images.githubusercontent.com/13763302/75098854-c0615300-5580-11ea-9a80-6068f14ca493.png">][fao] [<img valign="middle" src="https://img.shields.io/amo/v/timetab?color=0366d6&label=%20">][fao]
 
+[mea]: https://microsoftedge.microsoft.com/addons/detail/jolhgogcjdbajehdjcnjmkkdjgiimlng
+### [Install via Microsoft Edge Addons][mea] [<img valign="middle" height="22" src="https://user-images.githubusercontent.com/13763302/75323764-20831e00-583b-11ea-9aed-fd7f64476437.png">][mea]
+
 [ghr]: https://github.com/MEDIA76/timetab/releases/latest/download/timetab.zip
 > or [download][ghr] the latest [<img valign="middle" src="https://img.shields.io/github/v/release/MEDIA76/timetab?color=6a737d&label=%20">][ghr] `.zip` development version from GitHub.
 
