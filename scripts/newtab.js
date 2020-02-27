@@ -1,13 +1,10 @@
 chrome.storage.local.get([
   'scheme'
-], function(results) {
-  const { scheme } = results;
+], function(storage) {
   const query = window.matchMedia('(prefers-color-scheme: dark)');
   const mode = query.matches ? 'dark' : 'light';
 
-  document.body.setAttribute('class', scheme);
-
-  if(scheme !== mode) {
+  if(storage.scheme !== mode) {
     chrome.browserAction.setIcon({
       'path': `icons/${mode}/38.png`
     });
@@ -21,51 +18,59 @@ chrome.storage.local.get([
 chrome.storage.sync.get([
   'clocks',
   'settings'
-], function(results) {
-  const { clocks, settings } = results;
-  const main = document.querySelector('#clocks');
-  const template = main.querySelector('#clock');
-  const hand = document.createElement('hr');
-  const button = document.querySelector('#options');
+], function(storage) {
+  const clocksElement = document.querySelector('#clocks');
+  const clockTemplate = document.querySelector('#clock');
+  const optionsButton = document.querySelector('[name="options"]');
+  const handElement = document.createElement('hr');
 
-  button.addEventListener('click', function() {
-    chrome.runtime.openOptionsPage();
+  window.storage = storage;
+
+  optionsButton.addEventListener('click', function() {
+    this.parentElement.classList.toggle('open');
   });
 
-  clocks.forEach(clock => {
-    const clone = template.content.cloneNode(true);
+  clocksElement.appendChild(handElement);
 
-    if(clock.timeZone.includes('/')) {
-      clone.querySelector('time').timeZone = clock.timeZone;
-    }
+  (function createClocks() {
+    clocksElement.querySelectorAll('section').forEach(clock => {
+      clock.remove();
+    });
 
-    if(settings.labels) {
-      clone.querySelector('label').textContent = clock.label;
-    } else {
-      clone.querySelector('label').remove();
-    }
+    storage.clocks.forEach(clock => {
+      const clockClone = clockTemplate.content.cloneNode(true);
+      const timeElement = clockClone.querySelector('time');
+      const labelElement = clockClone.querySelector('label');
 
-    main.appendChild(clone);
-  });
+      if(clock.timeZone.includes('/')) {
+        timeElement.timeZone = clock.timeZone;
+      }
+
+      if(storage.settings.labels) {
+        labelElement.textContent = clock.label;
+      } else {
+        labelElement.remove();
+      }
+
+      handElement.before(clockClone);
+    });
+  })();
 
   setInterval(function update() {
     const date = new Date;
-    const seconds = date.getSeconds();
-    const degree = Math.round(360 * seconds / 60);
+    const degree = Math.round(360 * date.getSeconds() / 60);
 
-    main.querySelectorAll('time').forEach(time => {
+    clocksElement.querySelectorAll('time').forEach(time => {
       time.innerHTML = date.toLocaleTimeString('en-US', {
         'timeZone': time.timeZone || undefined,
-        'hour12': !settings.hour24,
+        'hour12': !storage.settings.hour24,
         'hour': 'numeric', 
         'minute': 'numeric'
       });
     });
 
-    hand.style.transform = `rotate(${degree}deg)`;
+    handElement.style.transform = `rotate(${degree}deg)`;
 
     return update;
   }(), 1000);
-
-  main.appendChild(hand);
 });
