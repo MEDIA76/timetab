@@ -44,10 +44,39 @@ body {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+}
+
+#widgets {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
   z-index: 1;
 }
 
-main {
+#widgets > section {
+  max-width: 25%;
+  margin: 10px;
+  border-radius: 15px;
+}
+
+#widgets > section.open {
+  background-color: #FFFFFF;
+}
+
+#widgets > section:not(.open) article {
+  display: none;
+}
+
+#widgets > #bottom.left {
+  position: absolute;
+  bottom: 0px;
+}
+
+#widgets article {
+  padding: 20px;
+}
+
+#clocks {
   display: flex;
   min-height: 100vh;
   padding: 40px;
@@ -57,7 +86,7 @@ main {
   flex-wrap: wrap;
 }
 
-main > section {
+#clocks > section {
   display: flex;
   padding: 40px;
   align-self: center;
@@ -65,7 +94,18 @@ main > section {
   flex-flow: column;
 }
 
-main > hr {
+#clocks > section.clock time {
+  font-size: 60px;
+  font-weight: 300;
+  color: var(--time);
+}
+
+#clocks > section.clock label {
+  margin-top: 10px;
+  color: var(--label);
+}
+
+#clocks > hr {
   position: fixed;
   top: calc(50% - 80vw);
   height: 160vw;
@@ -77,28 +117,16 @@ main > hr {
 }
 
 @media screen and (max-width: 600px) {
-  main > hr {
+  #clocks > hr {
     top: calc(50% - 80vh);
     height: 160vh;
     border-width: 0px 80vh;
   }
 }
 
-section > time {
-  font-size: 60px;
-  font-weight: 300;
-  color: var(--time);
-}
-
-section > label {
-  margin-top: 10px;
-  color: var(--label);
-}
-
 button {
-  position: fixed;
-  bottom: 0px;
-  padding: 20px;
+  display: block;
+  padding: 10px;
   color: var(--color);
   background-color: transparent;
   border: 0px;
