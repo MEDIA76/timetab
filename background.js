@@ -12,7 +12,7 @@ chrome.runtime.onInstalled.addListener(function() {
       'timeZone': 'Local',
       'label': 'Local'
     }],
-    'settings': {
+    'options': {
       'hour24': false,
       'labels': true
     }

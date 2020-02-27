@@ -1,7 +1,8 @@
 chrome.storage.local.get([
   'scheme'
 ], function(storage) {
-  const query = window.matchMedia('(prefers-color-scheme: dark)');
+  const feature = '(prefers-color-scheme: dark)';
+  const query = window.matchMedia(feature);
   const mode = query.matches ? 'dark' : 'light';
 
   if(storage.scheme != mode) {
@@ -17,7 +18,7 @@ chrome.storage.local.get([
 
 chrome.storage.sync.get([
   'clocks',
-  'settings'
+  'options'
 ], function(storage) {
   const widgets = document.querySelector('#widgets');
   const clocks = document.querySelector('#clocks');
@@ -43,7 +44,7 @@ chrome.storage.sync.get([
     clocks.querySelectorAll('time').forEach(time => {
       time.innerHTML = date.toLocaleTimeString('en-US', {
         'timeZone': time.timeZone || undefined,
-        'hour12': !storage.settings.hour24,
+        'hour12': !storage.options.hour24,
         'hour': 'numeric',
         'minute': 'numeric'
       });
@@ -53,10 +54,10 @@ chrome.storage.sync.get([
   }
 
   function updateLabels() {
-    let labels = storage.settings.labels;
+    let action = !storage.options.labels ? 'add' : 'remove';
 
     clocks.querySelectorAll('label').forEach(label => {
-      label.classList[!labels ? 'add' : 'remove']('hide');
+      label.classList[action]('hide');
     });
   }
 
@@ -66,16 +67,16 @@ chrome.storage.sync.get([
     const inputs = options.querySelectorAll('input');
 
     inputs.forEach(input => {
-      input.checked = storage.settings[input.name];
+      input.checked = storage.options[input.name];
 
       input.addEventListener('change', function() {
-        storage.settings[input.name] = this.checked;
+        storage.options[input.name] = this.checked;
 
         if(input.name == 'hour24') updateTime();
         if(input.name == 'labels') updateLabels();
 
         chrome.storage.sync.set({
-          'settings': storage.settings
+          'options': storage.options
         });
       });
     });
