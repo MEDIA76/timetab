@@ -54,9 +54,18 @@ body {
 }
 
 #widgets > section {
+  position: absolute;
   max-width: 25%;
   margin: 10px;
   border-radius: 15px;
+}
+
+#widgets > section.bottom {
+  bottom: 0px;
+}
+
+#widgets > section.right {
+  right: 0px;
 }
 
 #widgets > section.open {
@@ -65,11 +74,6 @@ body {
 
 #widgets > section:not(.open) article {
   display: none;
-}
-
-#widgets > #bottom.left {
-  position: absolute;
-  bottom: 0px;
 }
 
 #widgets article {
@@ -103,6 +107,10 @@ body {
 #clocks > section.clock label {
   margin-top: 10px;
   color: var(--label);
+}
+
+#clocks > section.clock label.hide {
+  display: none;
 }
 
 #clocks > hr {
