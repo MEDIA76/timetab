@@ -22,19 +22,43 @@ chrome.storage.sync.get([
 ], function(storage) {
   const widgets = document.querySelector('#widgets');
   const clocks = document.querySelector('#clocks');
+  const templates = document.querySelector('#templates');
   const hand = document.createElement('hr');
 
-  function createClock(clock) {
-    let template = clocks.querySelector('#clock');
-    let clone = template.content.cloneNode(true);
+  function createClock(element) {
+    let template = templates.querySelector('#clock');
+    let clock = template.content.cloneNode(true);
+    let time = clock.querySelector('time');
+    let label = clock.querySelector('label');
 
-    if(clock.timeZone.includes('/')) {
-      clone.querySelector('time').timeZone = clock.timeZone;
+    if(element.timeZone.includes('/')) {
+      time.timeZone = element.timeZone;
     }
 
-    clone.querySelector('label').textContent = clock.label;
+    label.textContent = element.label;
 
-    return clone;
+    return clock;
+  }
+
+  function createCheckbox(element) {
+    let template = templates.querySelector('#checkbox');
+    let checkbox = template.content.cloneNode(true);
+    let input = checkbox.querySelector('input');
+    let dfn = checkbox.querySelector('dfn');
+
+    input.name = element.option;
+    input.checked = storage.options[element.option];
+    dfn.textContent = element.label;
+
+    input.addEventListener('change', function() {
+      updateStorage('options', {
+        [element.option]: this.checked
+      });
+
+      if('change' in element) element.change();
+    });
+
+    return checkbox;
   }
 
   function updateTime() {
@@ -61,24 +85,31 @@ chrome.storage.sync.get([
     });
   }
 
+  function updateStorage(key, object) {
+    for(value in object) {
+      storage[key][value] = object[value];
+    }
+
+    chrome.storage.sync.set({
+      [key]: storage[key]
+    });
+  }
+
   (function buildOptions() {
-    const options = widgets.querySelector('article.options');
-    const button = widgets.querySelector('[name="options"]');
-    const inputs = options.querySelectorAll('input');
+    const options = widgets.querySelector('.options');
+    const widget = options.closest('.widget');
+    const button = widget.querySelector('[name="options"]');
 
-    inputs.forEach(input => {
-      input.checked = storage.options[input.name];
-
-      input.addEventListener('change', function() {
-        storage.options[input.name] = this.checked;
-
-        if(input.name == 'hour24') updateTime();
-        if(input.name == 'labels') updateLabels();
-
-        chrome.storage.sync.set({
-          'options': storage.options
-        });
-      });
+    [{
+      'option': 'hour24',
+      'label': 'Use 24 Hour',
+      'change': updateTime
+    },{
+      'option': 'labels',
+      'label': 'Show Labels',
+      'change': updateLabels
+    }].forEach(checkbox => {
+      options.appendChild(createCheckbox(checkbox));
     });
 
     button.addEventListener('click', function() {
