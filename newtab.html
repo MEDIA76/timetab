@@ -13,7 +13,7 @@
         <article class="options">
           <h2>Clocks</h2>
         </article>
-        <button type="button" name="options">
+        <button id="options" type="button">
           <img class="gear" />
         </button>
         <button type="button" name="add">
@@ -22,16 +22,15 @@
       </section>
       <section></section>
     </main>
-    <main id="clocks">
-    </main>
+    <main id="clocks"></main>
     <main id="templates">
-      <template id="clock">
+      <template for="clock">
         <section class="clock">
           <time></time>
           <label></label>
         </section>
       </template>
-      <template id="zone">
+      <template for="zone">
         <article class="inputs">
           <select name="timeZones">
             <option value="Local">Local</option>
@@ -467,7 +466,7 @@
           </button>
         </article>
       </template>
-      <template id="checkbox">
+      <template for="checkbox">
         <label>
           <input type="checkbox" />
           <dfn></dfn>

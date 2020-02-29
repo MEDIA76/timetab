@@ -1,3 +1,5 @@
+const body = document.body;
+
 chrome.storage.local.get([
   'scheme'
 ], function(storage) {
@@ -18,114 +20,144 @@ chrome.storage.local.get([
 
 chrome.storage.sync.get([
   'clocks',
-  'options'
+  'widgets'
 ], function(storage) {
-  const widgets = document.querySelector('#widgets');
-  const clocks = document.querySelector('#clocks');
-  const templates = document.querySelector('#templates');
+  const clocks = body.querySelector('#clocks');
+  const widgets = body.querySelector('#widgets');
+  const templates = body.querySelector('#templates');
   const hand = document.createElement('hr');
 
-  function createClock(element) {
-    let template = templates.querySelector('#clock');
-    let clock = template.content.cloneNode(true);
-    let time = clock.querySelector('time');
-    let label = clock.querySelector('label');
+  const create = {
+    'checkbox': function(element) {
+      let checkbox = create.clone('checkbox');
+      let input = checkbox.querySelector('input');
+      let dfn = checkbox.querySelector('dfn');
 
-    if(element.timeZone.includes('/')) {
-      time.timeZone = element.timeZone;
-    }
+      input.name = element.name;
+      input.checked = element.checked;
+      dfn.textContent = element.label;
 
-    label.textContent = element.label;
+      if('change' in element) {
+        input.addEventListener('change', element.change);
+      }
 
-    return clock;
-  }
+      return checkbox;
+    },
 
-  function createCheckbox(element) {
-    let template = templates.querySelector('#checkbox');
-    let checkbox = template.content.cloneNode(true);
-    let input = checkbox.querySelector('input');
-    let dfn = checkbox.querySelector('dfn');
+    'clock': function(element) {
+      let clock = create.clone('clock');
+      let time = clock.querySelector('time');
+      let label = clock.querySelector('label');
 
-    input.name = element.option;
-    input.checked = storage.options[element.option];
-    dfn.textContent = element.label;
+      if(element.timeZone.includes('/')) {
+        time.timeZone = element.timeZone;
+      }
 
-    input.addEventListener('change', function() {
-      updateStorage('options', {
-        [element.option]: this.checked
+      label.textContent = element.label;
+
+      return clock;
+    },
+
+    'clone': function(name) {
+      let attribute = `[for="${name}"]`;
+      let template = templates.querySelector(attribute);
+      let clone = template.content.cloneNode(true);
+
+      return clone;
+    },
+
+    'options': function(section, number) {
+      const options = section.querySelector('.options');
+      const button = section.querySelector('#options');
+
+      [{
+        'name': 'hour24',
+        'label': 'Use 24 Hour',
+        // 'change': update.time
+      },{
+        'name': 'labels',
+        'label': 'Show Labels',
+        // 'change': update.labels
+      }].forEach(object => {
+        object.checked = read.widget(number)[object.name];
+        object.change = function() {
+          update.widget(number, {
+            [object.name]: this.checked
+          });
+        };
+
+        options.appendChild(create.checkbox(object));
       });
 
-      if('change' in element) element.change();
-    });
-
-    return checkbox;
-  }
-
-  function updateTime() {
-    let date = new Date;
-    let degree = Math.round(360 * date.getSeconds() / 60);
-
-    clocks.querySelectorAll('time').forEach(time => {
-      time.innerHTML = date.toLocaleTimeString('en-US', {
-        'timeZone': time.timeZone || undefined,
-        'hour12': !storage.options.hour24,
-        'hour': 'numeric',
-        'minute': 'numeric'
+      button.addEventListener('click', function() {
+        this.parentElement.classList.toggle('open');
       });
-    });
+    },
 
-    hand.style.transform = `rotate(${degree}deg)`;
-  }
+    'zone': function(element) {
+      let zone = create.clone('zone');
 
-  function updateLabels() {
-    let action = !storage.options.labels ? 'add' : 'remove';
-
-    clocks.querySelectorAll('label').forEach(label => {
-      label.classList[action]('hide');
-    });
-  }
-
-  function updateStorage(key, object) {
-    for(value in object) {
-      storage[key][value] = object[value];
+      return zone;
     }
+  };
 
-    chrome.storage.sync.set({
-      [key]: storage[key]
-    });
-  }
+  const read = {
+    'widget': function(number) {
+      return storage.widgets[number];
+    }
+  };
 
-  (function buildOptions() {
-    const options = widgets.querySelector('.options');
-    const widget = options.closest('.widget');
-    const button = widget.querySelector('[name="options"]');
+  const update = {
+    'labels': function() {
+      let action = !read.widget(3).labels ? 'add' : 'remove';
 
-    [{
-      'option': 'hour24',
-      'label': 'Use 24 Hour',
-      'change': updateTime
-    },{
-      'option': 'labels',
-      'label': 'Show Labels',
-      'change': updateLabels
-    }].forEach(checkbox => {
-      options.appendChild(createCheckbox(checkbox));
-    });
+      clocks.querySelectorAll('label').forEach(label => {
+        label.classList[action]('hide');
+      });
+    },
 
-    button.addEventListener('click', function() {
-      this.parentElement.classList.toggle('open');
-    });
-  })();
+    'time': function() {
+      let date = new Date;
+      let degree = Math.round(360 * date.getSeconds() / 60);
 
-  (function buildClocks() {
+      clocks.querySelectorAll('time').forEach(time => {
+        time.innerHTML = date.toLocaleTimeString('en-US', {
+          'timeZone': time.timeZone || undefined,
+          'hour12': !read.widget(3).hour24,
+          'hour': 'numeric',
+          'minute': 'numeric'
+        });
+      });
+
+      hand.style.transform = `rotate(${degree}deg)`;
+    },
+
+    'widget': function(number, object = {}) {
+      for(value in object) {
+        storage.widgets[number][value] = object[value];
+      }
+
+      chrome.storage.sync.set({
+        'widgets': storage.widgets
+      });
+    }
+  };
+
+  (function() {
     clocks.appendChild(hand);
 
-    storage.clocks.forEach(clock => {
-      hand.before(createClock(clock));
+    storage.clocks.forEach(object => {
+      hand.before(create.clock(object));
     });
 
-    updateTime(); updateLabels();
+    update.time(); update.labels();
 
-    setInterval(updateTime, 1000);
+    [...widgets.children].forEach((section, index) => {
+      let widget = storage.widgets[index = ++index];
+
+      if(widget) create[widget.type](section, index);
+    });
+
+    setInterval(update.time, 1000);
   })();
 });
