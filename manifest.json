@@ -28,5 +28,6 @@
     "open_in_tab": false
   },
   "offline_enabled": true,
+  "default_locale": "en",
   "manifest_version": 2
 }

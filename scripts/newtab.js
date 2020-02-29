@@ -72,36 +72,35 @@ chrome.storage.sync.get([
 
       [{
         'name': 'hour24',
-        'label': 'Use 24 Hour',
-        // 'change': update.time
+        'change': update.time
       },{
         'name': 'labels',
-        'label': 'Show Labels',
-        // 'change': update.labels
+        'change': update.labels
       }].forEach(object => {
-        object.checked = read.widget(number)[object.name];
-        object.change = function() {
-          update.widget(number, {
-            [object.name]: this.checked
-          });
-        };
+        options.appendChild(create.checkbox({
+          'label': read.string(object.name),
+          'checked': read.widget(number)[object.name],
+          'change': function() {
+            update.widget(number, {
+              [object.name]: this.checked
+            });
 
-        options.appendChild(create.checkbox(object));
+            object.change();
+          }
+        }));
       });
 
       button.addEventListener('click', function() {
         this.parentElement.classList.toggle('open');
       });
-    },
-
-    'zone': function(element) {
-      let zone = create.clone('zone');
-
-      return zone;
     }
   };
 
   const read = {
+    'string': function(string) {
+      return chrome.i18n.getMessage(string);
+    },
+
     'widget': function(number) {
       return storage.widgets[number];
     }
