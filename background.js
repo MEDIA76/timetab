@@ -10,7 +10,7 @@ chrome.runtime.onInstalled.addListener(function() {
   chrome.storage.sync.set({
     'clocks': [{
       'timeZone': 'Local',
-      'label': 'Local'
+      'label': chrome.i18n.getMessage('local')
     }],
     'widgets': {
       1: false,

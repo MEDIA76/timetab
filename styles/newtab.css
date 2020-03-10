@@ -80,16 +80,16 @@ main:not(#templates) {
   padding: 20px;
 }
 
-#widgets > section:not(.open) > .options,
-#widgets > section:not(.open) > button {
+#widgets:not(.open) > section > * {
   display: none;
 }
 
-#widgets > section.open {
+#widgets.open > section.widget {
   background-color: #FFFFFF;
 }
 
-#widgets #options {
+#widgets #options,
+#widgets *.keep {
   display: block !important;
 }
 

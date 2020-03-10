@@ -69,6 +69,9 @@ chrome.storage.sync.get([
     'options': function(section, number) {
       const options = section.querySelector('.options');
       const button = section.querySelector('#options');
+      const h2 = options.querySelector('h2');
+
+      h2.textContent = read.string('clocks');
 
       [{
         'name': 'hour24',
@@ -91,7 +94,7 @@ chrome.storage.sync.get([
       });
 
       button.addEventListener('click', function() {
-        this.parentElement.classList.toggle('open');
+        widgets.classList.toggle('open');
       });
     }
   };

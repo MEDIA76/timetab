@@ -1,8 +1,14 @@
 {
+  "clocks": {
+    "message": "Clocks"
+  },
   "hour24": {
     "message": "Use 24 Hour"
   },
   "labels": {
     "message": "Show Labels"
+  },
+  "local": {
+    "message": "Local"
   }
 }
