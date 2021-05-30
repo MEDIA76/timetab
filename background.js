@@ -14,8 +14,10 @@ chrome.runtime.onInstalled.addListener(function() {
     }],
     'settings': {
       'hour24': false,
-      'labels': true
-    }
+      'labels': true,
+      'customColor': '30, 30, 30',
+      'customOpacity': '.05'
+    },
   });
 
   chrome.storage.local.set({

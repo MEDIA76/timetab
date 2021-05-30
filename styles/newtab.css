@@ -16,8 +16,8 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --color-rgb: 185, 186, 188;
-    --background-rgb: 32, 33, 36;
-    --hand-opacity: 0.01;
+    --background-rgb: 0, 0, 0;
+    --hand-opacity: 0.05;
   }
 }
 
