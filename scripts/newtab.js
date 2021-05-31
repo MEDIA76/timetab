@@ -16,7 +16,24 @@ chrome.storage.local.get([
       'scheme': mode
     });
   }
+
+
+
 });
+
+chrome.storage.sync.get([
+  'settings'
+], function(results) {
+  const {settings} = results;
+  yy = getComputedStyle(document.documentElement).getPropertyValue("--background-rgb")
+  console.log("current color: ", yy)
+  console.log("chosen color: ", settings.customOpacity)
+  document.documentElement.style.setProperty("--background-rgb", settings.customColor);
+  document.documentElement.style.setProperty("--hand-opacity", settings.customOpacity);
+})
+
+
+
 
 chrome.storage.sync.get([
   'clocks',
@@ -63,6 +80,7 @@ chrome.storage.sync.get([
     });
 
     hand.style.transform = `rotate(${degree}deg)`;
+
 
     return update;
   }(), 1000);
